@@ -114,6 +114,10 @@ In LSDJ the `sync` mode should be set to `Midiout`.
 
 *This requires a special version of LSDJ, which can be found in your account on the [LSDJ website](http://littlesounddj.com/lsd/latest/full_version/).*
 
+#### Mode 8 Poly-only Full MIDI with mGB
+
+This is useful for polyphony on musical keyboards that can't change MIDI channels.
+
 
 ## Max Editor
 ![Editor gui](Editor/editor.png)

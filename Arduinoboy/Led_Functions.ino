@@ -30,6 +30,10 @@ void showSelectedMode()
         digitalWrite(pinLeds[4],HIGH);
         digitalWrite(pinLeds[5],HIGH);
         break;
+      case 7:
+        digitalWrite(pinLeds[0],HIGH);
+        digitalWrite(pinLeds[4],HIGH);
+        break;
 
     }
   delay(100);
@@ -243,25 +247,3 @@ void startupSequence()
   delay(500);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

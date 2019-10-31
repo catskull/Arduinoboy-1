@@ -39,7 +39,7 @@
  *     - Serial Data from gameboy on analog in pin 18                      *
  *                                                                         *
  *   Teensy USB MIDI is supported                                          *
- *   Teensy LC should work but untested                                    *
+ *   Teensy LC works                                                       *
  *                                                                         *
  * Program Information:                                                    *
  *    LSDJ Slave Mode Midi Note Effects:                                   *
@@ -77,7 +77,7 @@
  ***************************************************************************/
 #include <EEPROM.h>
 #define MEM_MAX 65
-#define NUMBER_OF_MODES 7    //Right now there are 7 modes, Might be more in the future
+#define NUMBER_OF_MODES 8    //Right now there are 8 modes, Might be more in the future
 
 //!!! do not edit these, they are the position in EEPROM memory that contain the value of each stored setting
 #define MEM_CHECK 0
@@ -452,8 +452,3 @@ void loop () {
   setMode();
   switchMode();
 }
-
-
-
-
-

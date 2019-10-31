@@ -45,7 +45,11 @@ void modeMidiGb()
             sendByte = false;
             midiStatusChannel = incomingMidiByte&0x0F;
             midiStatusType    = incomingMidiByte&0xF0;
-            if(midiStatusChannel == memory[MEM_MGB_CH]) {
+            if (memory[MEM_MODE] == 7  // All-Poly mGB Mode
+                  || midiStatusChannel == memory[MEM_MGB_CH+4]) {
+               midiData[0] = midiStatusType+4;
+               sendByte = true;
+            } else if(midiStatusChannel == memory[MEM_MGB_CH]) {
                midiData[0] = midiStatusType;
                sendByte = true;
             } else if (midiStatusChannel == memory[MEM_MGB_CH+1]) {
@@ -56,9 +60,6 @@ void modeMidiGb()
                sendByte = true;
             } else if (midiStatusChannel == memory[MEM_MGB_CH+3]) {
                midiData[0] = midiStatusType+3;
-               sendByte = true;
-            } else if (midiStatusChannel == memory[MEM_MGB_CH+4]) {
-               midiData[0] = midiStatusType+4;
                sendByte = true;
             } else {
               midiValueMode  =false;
@@ -126,7 +127,11 @@ void modeMidiGbUsbMidiReceive()
     while(usbMIDI.read()) {
         uint8_t ch = usbMIDI.getChannel() - 1;
         boolean send = false;
-        if(ch == memory[MEM_MGB_CH]) {
+        if (memory[MEM_MODE] == 7  // All-Poly mGB Mode
+                || ch == memory[MEM_MGB_CH+4]) {
+            ch = 4;
+            send = true;
+        } else if(ch == memory[MEM_MGB_CH]) {
             ch = 0;
             send = true;
         } else if (ch == memory[MEM_MGB_CH+1]) {
@@ -137,9 +142,6 @@ void modeMidiGbUsbMidiReceive()
             send = true;
         } else if (ch == memory[MEM_MGB_CH+3]) {
             ch = 3;
-            send = true;
-        } else if (ch == memory[MEM_MGB_CH+4]) {
-            ch = 4;
             send = true;
         }
         if(!send) return;
@@ -189,6 +191,3 @@ void modeMidiGbUsbMidiReceive()
     }
 #endif
 }
-
-
-

@@ -18,7 +18,7 @@
  /*
    setMode will check if the push button is depressed, If it is it will 
    increment the mode number and make sure its in the 
-   range 0 to 4 by mod (%). It will then write the mode to memory,
+   range 0 to 7. It will then write the mode to memory,
    set the leds to display the mode, and switch the code over to the
    right function.
  */
@@ -30,7 +30,7 @@ void setMode()
   if(!memory[MEM_FORCE_MODE] && buttonDepressed) { //if the button is pressed
     memory[MEM_MODE]++;                           //increment the mode number
     if(memory[MEM_MODE] > (NUMBER_OF_MODES - 1)) memory[MEM_MODE]=0;  //if the mode is greater then 4 it will wrap back to 0
-    if(!memory[MEM_FORCE_MODE]) EEPROM.write(MEM_MODE, memory[MEM_MODE]); //write mode to eeprom if we arnt forcing a mode in the config
+    if(!memory[MEM_FORCE_MODE]) EEPROM.write(MEM_MODE, memory[MEM_MODE]); //write mode to eeprom if we aren't forcing a mode in the config
     showSelectedMode();            //set the LEDS
     switchMode();
   }
@@ -59,6 +59,7 @@ void switchMode()
       modeNanoloopSetup();
       break;
     case 4:
+    case 7:
       modeMidiGbSetup();
       break;
     case 5:
@@ -110,27 +111,3 @@ void sequencerStop()
   digitalWrite(pinLeds[3],LOW);
   digitalWrite(pinLeds[memory[MEM_MODE]],HIGH);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
